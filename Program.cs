@@ -1,4 +1,6 @@
-﻿namespace CSharp
+﻿using System.Threading.Channels;
+
+namespace CSharp
 {
     internal class Program
     {
@@ -12,33 +14,34 @@
             // float   실수형 (1.0 3.14)
             // string  문자열 ("Rookiss")
             // bool    불리언 (true/false)
+            
+            // [  ]
+            short b = 100;
+            // [ ]
+            int a = b;
 
-            // [데이터 타입] [이름];
-            int hp = 500;
-            int maxHp;
+            //Console.WriteLine(a);
+            // 100 -> 100.0f
+            int d = 100;
+            float c = d;
+            //Console.WriteLine(c);
 
-            // TODO
-            maxHp = hp;
+            // string -> int
+            //string input = Console.ReadLine();
+            //int number = int.Parse(input);
+            //Console.WriteLine(number);
 
-            // [ 메모리 공간 ]
-            float a;
-            a = 4.5f;
+            // int -> string
+            int hp = 100;
+            int maxHp = 100;
 
-            double b;
-            b = 3.5;
+            // 당신의 HP는 ?? 입니다.
+            // stirng Format 방법 : 대입해야할 값이 많아지면 복잡해지는 단점은 있음
+            //string message = string.Format("당신의 HP는 {0}/{1}입니다.", hp, maxHp);
 
-            string name;
-            name = "Rookiss";
-
-            char ch = 'R';
-
-            Console.WriteLine(name);
-            Console.WriteLine(ch);
-
-            Console.WriteLine(a);
-            Console.WriteLine(b);
-
-            Console.WriteLine(hp);
+            // string interpolation 방법 : 직관적
+            string message = $"당신의 HP는 {hp} / {maxHp}입니다";
+            Console.WriteLine(message);
         }
     }
 }
