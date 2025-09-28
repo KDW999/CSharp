@@ -1,47 +1,40 @@
-﻿using System.Threading.Channels;
+﻿using System.ComponentModel.Design;
+using System.Threading.Channels;
 
 namespace CSharp
 {
     internal class Program
     {
-        // C#의 주석
-        /*
-         다중 주석
-         */
+      
         static void Main(string[] args)
         {
-            // int     정수형 (-1 0 1 2 3 4)
-            // float   실수형 (1.0 3.14)
-            // string  문자열 ("Rookiss")
-            // bool    불리언 (true/false)
+            // 삼항연산자
+
+            int number = 25;
+            bool isPair = ((number % 2) == 0 ? true : false);
             
-            // [  ]
-            short b = 100;
-            // [ ]
-            int a = b;
 
-            //Console.WriteLine(a);
-            // 100 -> 100.0f
-            int d = 100;
-            float c = d;
-            //Console.WriteLine(c);
+            int choice = 2; // 0:가위 1:바위 2:보 3: 치트키
 
-            // string -> int
-            //string input = Console.ReadLine();
-            //int number = int.Parse(input);
-            //Console.WriteLine(number);
+            switch (choice)
+            {
+                case 0:
+                    Console.WriteLine("가위입니다");
+                    break;
+                case 1:
+                    Console.WriteLine("바위입니다.");
+                    break;
+                case 2:
+                    Console.WriteLine("보입니다.");
+                    break;
+                case 3:
+                    Console.WriteLine("치트키입니다.");
+                    break;
+                default:
+                    Console.WriteLine("다 실패했습니다.");
+                    break;
+            }
 
-            // int -> string
-            int hp = 100;
-            int maxHp = 100;
-
-            // 당신의 HP는 ?? 입니다.
-            // stirng Format 방법 : 대입해야할 값이 많아지면 복잡해지는 단점은 있음
-            //string message = string.Format("당신의 HP는 {0}/{1}입니다.", hp, maxHp);
-
-            // string interpolation 방법 : 직관적
-            string message = $"당신의 HP는 {hp} / {maxHp}입니다";
-            Console.WriteLine(message);
         }
     }
 }
