@@ -6,20 +6,20 @@ namespace CSharp
 {
     internal class Program
     {
-        // 
-        
-
-        static int Add(int a, int b, int c= 0, float d = 1.0f, double e = 3.0)
+        static int Factorial(int n)
         {
-            Console.WriteLine("Add int 호출");
-            return a + b + c;
+            int sum = n;
+            for (int i=n-1; i>0; i--) 
+            {
+                sum = sum * i;
+            }
+            return sum;
         }
-       
-          static void Main(string[] args)
+        static void Main(string[] args)
         {
-            Program.Add(1, 2, 3, 2.0f, 4.0);
 
-
+            int ret = Factorial(5);
+            Console.WriteLine(ret);
         }
     }
 }
