@@ -1,0 +1,32 @@
+using System.Collections.Specialized;
+using System.ComponentModel.Design;
+using System.Threading.Channels;
+
+namespace CSharp
+{
+    // 메소드 호출 => Inception
+    // 현실 -> 1차 꿈 -> 2차 꿈 -> 3차 꿈
+   internal class Program
+    {
+        static void Print(int value)
+        {
+            Console.WriteLine(value);
+        }
+        static int AddAndPrint(int a, int b)
+        {
+            int ret = a + b;
+            Print(ret);
+            return ret;
+        }
+
+        static void Main(string[] args)
+        {
+
+            Program.AddAndPrint(5, 15);
+            Program.AddAndPrint(6, 20);
+            Program.AddAndPrint(10, 202);
+            Program.AddAndPrint(10, 31);
+            Program.AddAndPrint(10, 20);
+        }
+    }
+}
