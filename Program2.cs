@@ -85,7 +85,7 @@
             Random rand = new Random();
             int randMonster = rand.Next(1, 4);
             rand.Next(1, 4);
-            switch(randMonster)
+            switch (randMonster)
             {
                 case (int)MonsterType.Slime:
                     Console.WriteLine("슬라임이 스폰되었습니다.");
@@ -115,18 +115,65 @@
 
         }
 
-        static void EnterField()
+        static void Fight(ref Player player, ref Monster monster)
         {
-            Console.WriteLine("필드에 접속했습니다!");
+            while (true)
+            {
+                // 플레이어가 몬스터 공격
+                monster.hp -= player.attack;
+                if (monster.hp <= 0)
+                {
+                    Console.WriteLine("승리했습니다!");
+                    Console.WriteLine($"남은 체력 : {player.hp}");
+                    break;
+                }
 
-            // 랜덤으로 1~3 몬스터 중 하나를 리스폰
-            Monster monster;
-            CreateRandomMonster(out monster);
-
-            Console.WriteLine("[1] 전투 모드로 돌입");
-            Console.WriteLine("[2] 일정 확률로 마을로 도망");
+                // 몬스터 반격
+                player.hp -= monster.attack;
+                if (player.hp <= 0)
+                {
+                    Console.WriteLine("패배했습니다!");
+                    break;
+                }
+            }
         }
-        static void EnterGame()
+        static void EnterField(ref Player player)
+        {
+            while (true)
+            {
+
+                Console.WriteLine("필드에 접속했습니다!");
+
+                // 랜덤으로 1~3 몬스터 중 하나를 리스폰
+                Monster monster;
+                CreateRandomMonster(out monster);
+
+                Console.WriteLine("[1] 전투 모드로 돌입");
+                Console.WriteLine("[2] 일정 확률로 마을로 도망");
+
+                string input = Console.ReadLine();
+                if (input == "1")
+                {
+                    Fight(ref player, ref monster);
+                }
+                else if (input == "2")
+                {
+                    // 33%
+                    Random rand = new Random();
+                    int randValue = rand.Next(0, 101);
+                    if (randValue <= 33)
+                    {
+                        Console.WriteLine("도망치는데 성공했습니다.");
+                        break;
+                    }
+                    else
+                    {
+                        Fight(ref player, ref monster);
+                    }
+                }
+            }
+        }
+        static void EnterGame(ref Player player)
         {
 
             while (true)
@@ -138,9 +185,9 @@
 
                 string input = Console.ReadLine();
 
-                if(input == "1")
+                if (input == "1")
                 {
-                    EnterField();
+                    EnterField(ref player);
 
                 }
                 else if (input == "2")
@@ -158,19 +205,14 @@
                 ClassType choice = ClassType.None;
                 choice = ChooseClass();
 
-                if (choice != ClassType.None)
-                {
+                if (choice == ClassType.None)
+                    continue;
+
                     // 캐릭터 생성
                     Player player;
                     CreatePlayer(choice, out player);
+                    EnterGame(ref player);
 
-                    EnterGame();
-
-                    // 기사(100/10) 궁수(75/12) 법사(50/15)
-                    Console.WriteLine($"HP: {player.hp}, ATTACK: {player.attack}");
-
-                    // 필드로 가서 몬스터랑 싸운다 
-                }
             }
         }
     }
