@@ -4,39 +4,74 @@ using System.Threading.Channels;
 
 namespace CSharp
 {
-    // 메소드 호출 => Inception
-    // 현실 -> 1차 꿈 -> 2차 꿈 -> 3차 꿈
-   //internal class Program
-   // {
-   //     static void Start()
-   //     {
-   //         Console.WriteLine("직업을 선택하세요!");
-   //         Console.WriteLine("[1] 기사");
-   //         Console.WriteLine("[2] 궁수");
-   //         Console.WriteLine("[3] 법사");
+    // 객체(OOP Object Oriented Programming)
 
-   //         int selClass = int.Parse(Console.ReadLine());
+    // Ref 참조
+    class Knight
+    {
+        public int hp;
+        public int attack;
 
-   //         switch (selClass)
-   //         {
-   //             case 1:
-   //                 Console.WriteLine("기사 선택");
-   //                 break;
-   //             case 2:
-   //                 Console.WriteLine("궁수 선택");
-   //                 break;
-   //             case 3:
-   //                 Console.WriteLine("법사 선택");
-   //                 break;
-   //             default:
-   //                 Start();
-   //                 break;
-   //         }
+        public Knight()
+        {
 
-   //     }
-   //     static void Main(string[] args)
-   //     {
-   //         Program.Start();
-   //     }
-   // }
+        }
+
+        public Knight Clone()
+        {
+            Knight knight = new Knight();
+            knight.hp = hp;
+            knight.attack = attack;
+            return knight;
+        }
+
+
+        public void Move()
+        {
+            Console.WriteLine("knight Move");
+        }
+
+        public void Attack()
+        {
+            Console.WriteLine("knight Attack");
+        }
+    }
+
+    // 복사
+    struct Mage
+    {
+        public int hp;
+        public int attack;
+    }
+        internal class Program
+    {
+       
+        static void KillMage(Mage mage)
+        {
+            mage.hp = 0;
+        }
+
+        static void KillKnight(Knight knight)
+        {
+            knight.hp = 0;
+        }
+        static void Main(string[] args)
+        {
+            Mage mage;
+            mage.hp = 100;
+            mage.attack = 50;
+
+            Mage mage2 = mage;
+            mage2.hp = 0;
+
+            Knight knight = new Knight();
+
+            knight.hp = 100;
+            knight.attack = 10;
+
+            Knight knight2 = knight.Clone();
+            knight2.hp = 0;
+
+        }
+    }
 }
