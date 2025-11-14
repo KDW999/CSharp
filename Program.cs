@@ -15,8 +15,23 @@ namespace CSharp
         public Knight()
         {
 
+            hp = 100;
+            attack = 0;
+            Console.WriteLine("생성자 호출");
         }
 
+        public Knight(int hp) : this()
+        {
+            this.hp = hp;
+            Console.WriteLine("int 생성자 호출");
+        }
+
+        public Knight(int hp, int attack)
+        {
+            this.hp = hp;
+            this.attack = attack;
+            Console.WriteLine("int, int 생성자 호출");
+        }
         public Knight Clone()
         {
             Knight knight = new Knight();
@@ -24,54 +39,23 @@ namespace CSharp
             knight.attack = attack;
             return knight;
         }
-
-
         public void Move()
         {
             Console.WriteLine("knight Move");
         }
-
         public void Attack()
         {
             Console.WriteLine("knight Attack");
         }
     }
 
-    // 복사
-    struct Mage
-    {
-        public int hp;
-        public int attack;
-    }
         internal class Program
     {
        
-        static void KillMage(Mage mage)
-        {
-            mage.hp = 0;
-        }
-
-        static void KillKnight(Knight knight)
-        {
-            knight.hp = 0;
-        }
         static void Main(string[] args)
         {
-            Mage mage;
-            mage.hp = 100;
-            mage.attack = 50;
-
-            Mage mage2 = mage;
-            mage2.hp = 0;
-
-            Knight knight = new Knight();
-
-            knight.hp = 100;
-            knight.attack = 10;
-
-            Knight knight2 = knight.Clone();
-            knight2.hp = 0;
-
+            Knight knight = new Knight(50, 5);
+ 
         }
     }
 }
