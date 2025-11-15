@@ -1,5 +1,6 @@
 ﻿using System.Collections.Specialized;
 using System.ComponentModel.Design;
+using System.Runtime.CompilerServices;
 using System.Threading.Channels;
 
 namespace CSharp
@@ -9,11 +10,29 @@ namespace CSharp
     // Ref 참조
     class Knight
     {
+        // 필드
+        static public int counter = 1; // 오로지 1개만 존재
+
+        public int id;
         public int hp;
         public int attack;
 
+        static public void Test()
+        {
+            counter++;
+        }
+
+        static public Knight CreateKnight()
+        {
+            Knight knight = new Knight();
+            knight.hp = 100;
+            knight.attack = 10;
+            return knight;
+        }
         public Knight()
         {
+            id = counter;
+            counter++;
 
             hp = 100;
             attack = 0;
@@ -49,13 +68,13 @@ namespace CSharp
         }
     }
 
-        internal class Program
+    internal class Program
     {
-       
+
         static void Main(string[] args)
         {
-            Knight knight = new Knight(50, 5);
- 
+            Knight knight = Knight.CreateKnight(); // static
+            knight.Move(); // 일반
         }
     }
 }
