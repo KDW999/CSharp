@@ -5,42 +5,53 @@ using System.Threading.Channels;
 
 namespace CSharp
 {
-    // OOP(은닉성/상속성/다형성)
-   
-    // 자동차
-    // 핸들 페달 차문
-    // 전기장치 엔진 기름 <-> 외부 노출
-    // 설계 시 위험하냐, 대충 사용해도되냐의 보안레벨
+     // OOP(은닉성/상속성/다형성)
 
-    class Knight
+    class Player
     {
-        // 접근 한정자
-        // public 모두 접근
-        // protected 자식 클래스는 접근 가능
-        // private 같은 클래스 내에서만, 접근한정자 아무것도 안붙이면 기본적으로 private
-        // 변수를 private 메서드를 public으로 사용하면 여러 곳에서 hp를 사용 시 어디서 사용했는지 찾기가 쉽다
         protected int hp;
- 
-
+        protected int attack;   
     }
-
-    class SuperKnight : Knight
+     class Knight : Player
     {
-        void Test()
-        {
-            hp = 10;
-        }
+
     }
 
-        
+    class Mage : Player
+    {
+        public int mp;
+    }
 
     internal class Program
-    {
+    { 
+        static void EnterGame(Player player)
+        {
+            // is가 가능하면 as도 사용 가능
+            // as는 형변환 할 수 있으면 형변환시킨다, 변환할 수 없으면 null 반환
+            Mage mage = (player as Mage);
+
+            if (mage != null)
+            {
+                Console.WriteLine("Mage");
+                mage.mp = 10;
+            }
+        }
         static void Main(string[] args)
         {
+            Knight knight2 = null; // 빈값
             Knight knight = new Knight();
-            knight.SetHp(100);
+            Mage mage = new Mage();
 
+
+            // Mage 타입 -> Player 타입
+            // Player 타입 -> Mage 타입 (강제 형변환)
+            Player magePlayer = mage;
+            Mage mage2 = (Mage)magePlayer;
+
+            Player p1 = knight;
+            Mage m1 = mage;
+
+            EnterGame(mage);
         }
     }
 }
