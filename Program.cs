@@ -5,53 +5,74 @@ using System.Threading.Channels;
 
 namespace CSharp
 {
-     // OOP(은닉성/상속성/다형성)
+    // OOP(은닉성/상속성/다형성 Polymorphism)
 
     class Player
     {
         protected int hp;
-        protected int attack;   
+        protected int attack;
+
+        // virtual : 자식 클래스에서 재정의 가능
+        public virtual void Move()
+        {
+            Console.WriteLine("Player 이동!");
+        }
     }
-     class Knight : Player
+
+    // 오버로딩 : 함수 이름의 재사용, 같은 이름의 메서드를 매개변수로 구분
+    // 오버라이딩 : 부모의 메서드를 자식 클래스에서 재정의
+    class Knight : Player
     {
 
+        // new : 부모에 있는 Move 메서드를 숨김
+        // override : 부모에 있는 Move 메서드를 재정의
+        // sealed : 자식 클래스에서 더 이상 재정의 불가
+        public override void Move()
+        {
+            base.Move(); // 부모의 Move 호출
+            Console.WriteLine("Knight 이동!");
+        }
+    }
+
+    class SuperKnight : Knight
+    {
+        public override void Move()
+        {
+            Console.WriteLine("SuperKnight 이동!");
+        }
     }
 
     class Mage : Player
     {
         public int mp;
+
+        public new void Move()
+        {
+            Console.WriteLine("Mage 이동!");
+        }
     }
 
     internal class Program
-    { 
+    {
         static void EnterGame(Player player)
         {
-            // is가 가능하면 as도 사용 가능
-            // as는 형변환 할 수 있으면 형변환시킨다, 변환할 수 없으면 null 반환
+            player.Move();
+            
             Mage mage = (player as Mage);
-
             if (mage != null)
             {
-                Console.WriteLine("Mage");
                 mage.mp = 10;
             }
+ 
         }
         static void Main(string[] args)
         {
-            Knight knight2 = null; // 빈값
             Knight knight = new Knight();
             Mage mage = new Mage();
 
+            knight.Move();
 
-            // Mage 타입 -> Player 타입
-            // Player 타입 -> Mage 타입 (강제 형변환)
-            Player magePlayer = mage;
-            Mage mage2 = (Mage)magePlayer;
-
-            Player p1 = knight;
-            Mage m1 = mage;
-
-            EnterGame(mage);
+            //EnterGame(mage);
         }
     }
 }
