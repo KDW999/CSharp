@@ -36,7 +36,7 @@ namespace CSharp
 
     class Archer : Player
     {
-        public Archer() : base(PlayerType.Knight)
+        public Archer() : base(PlayerType.Archer)
         {
             SetInfo(75, 12);
         }
@@ -44,7 +44,7 @@ namespace CSharp
 
     class Mage : Player
     {
-        public Mage() : base(PlayerType.Knight)
+        public Mage() : base(PlayerType.Mage)
         {
             SetInfo(65, 15);
         }
