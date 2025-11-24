@@ -8,30 +8,93 @@ namespace CSharp
 
     internal class Program
     {
-        static void Main(string[] args)
+        static int GetHighestScore(int[] scores)
         {
-            // 배열, 
-            int[] scores = new int[5] { 10, 20, 30, 40, 50 };
-            // new int로 동적할당하기에 참조타입
-
-            int[] scores2 = scores;
-            scores2[0] = 5555;
-            // 0 1 2 3 4
-            //scores[0] = 10;
-            //scores[1] = 20;
-            //scores[2] = 30;
-            //scores[3] = 40;
-            //scores[4] = 50;
-
-            for(int i=0; i<scores.Length; i++)
+            int highest = 0;
+            foreach (int score in scores)
             {
-                Console.WriteLine(scores[i]);
+                if (score > highest) highest = score;
             }
+            return highest;
+        }
+
+        static int GetAverageScore(int[] scores)
+        {
+            if(scores.Length == 0)
+            {
+                return 0;
+            }
+
+            int sum = 0;
+            foreach (int score in scores)
+            {
+                sum += score;
+            }
+
+            return sum / scores.Length;
+        }
+
+        static int GetIndexOf(int[] scores, int value)
+        {
+            for (int i = 0; i< scores.Length; i++)
+            {
+                if (scores[i] == value) return i;
+            }
+            return -1;
+        }
+
+        static void Sort(int[] scores)
+        {
+            for(int i = 0; i < scores.Length; i++)
+            {
+                // [i ~ scores.Length - 1 ] 제일 작은 숫자가 있는 index를 찾는다.
+                int minIndex = i;
+                for(int j=i; j<scores.Length; j++)
+                {
+                    if (scores[j] < scores[minIndex]) minIndex = j;
+                }
+
+                // swap
+                int temp = scores[i];
+                scores[i] = scores[minIndex];
+                scores[minIndex] = temp;
+
+            }
+
+            //for (int i = 0; i < scores.Length - 1; i++)
+            //{
+            //    for (int j = i + 1; j < scores.Length; j++)
+            //    {
+            //        if (scores[i] > scores[j])
+            //        {
+            //            int temp = scores[i];
+            //            scores[i] = scores[j];
+            //            scores[j] = temp;
+            //        }
+
+            //    }
+            //}
 
             foreach (int score in scores)
             {
                 Console.WriteLine(score);
             }
+        }
+        static void Main(string[] args)
+        {
+            // 배열, 
+            int[] scores = new int[5] { 10, 30, 40, 20, 50 };
+            int highestValue = GetHighestScore(scores);
+            Console.WriteLine(highestValue);
+
+            int averageScore = GetAverageScore(scores);
+            Console.WriteLine(averageScore);
+
+            int index = GetIndexOf(scores, 25);
+            Console.WriteLine(index);
+
+            Sort(scores);
+
         }
     }
 }
