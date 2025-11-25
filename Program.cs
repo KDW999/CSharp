@@ -8,93 +8,50 @@ namespace CSharp
 
     internal class Program
     {
-        static int GetHighestScore(int[] scores)
+        class Map
         {
-            int highest = 0;
-            foreach (int score in scores)
-            {
-                if (score > highest) highest = score;
-            }
-            return highest;
-        }
 
-        static int GetAverageScore(int[] scores)
-        {
-            if(scores.Length == 0)
+            int[,] tiles = {
+            {1, 1, 1, 1, 1 },
+            {1, 0, 0, 0, 1 },
+            {1, 0, 0, 0, 1 },
+            {1, 0, 0, 0, 1 },
+            {1, 1, 1, 1, 1 }};
+            public void Render()
             {
-                return 0;
-            }
+            ConsoleColor defaultColor = Console.ForegroundColor;
 
-            int sum = 0;
-            foreach (int score in scores)
-            {
-                sum += score;
-            }
-
-            return sum / scores.Length;
-        }
-
-        static int GetIndexOf(int[] scores, int value)
-        {
-            for (int i = 0; i< scores.Length; i++)
-            {
-                if (scores[i] == value) return i;
-            }
-            return -1;
-        }
-
-        static void Sort(int[] scores)
-        {
-            for(int i = 0; i < scores.Length; i++)
-            {
-                // [i ~ scores.Length - 1 ] 제일 작은 숫자가 있는 index를 찾는다.
-                int minIndex = i;
-                for(int j=i; j<scores.Length; j++)
+                for(int y=0; y<tiles.GetLength(1); y++)
                 {
-                    if (scores[j] < scores[minIndex]) minIndex = j;
+                    for(int x =0; x<tiles.GetLength(0); x++)
+                    {
+                        if (tiles[y, x] == 1)
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        else
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        Console.Write('\u25cf');
+                    }
+                    Console.WriteLine();
                 }
 
-                // swap
-                int temp = scores[i];
-                scores[i] = scores[minIndex];
-                scores[minIndex] = temp;
-
-            }
-
-            //for (int i = 0; i < scores.Length - 1; i++)
-            //{
-            //    for (int j = i + 1; j < scores.Length; j++)
-            //    {
-            //        if (scores[i] > scores[j])
-            //        {
-            //            int temp = scores[i];
-            //            scores[i] = scores[j];
-            //            scores[j] = temp;
-            //        }
-
-            //    }
-            //}
-
-            foreach (int score in scores)
-            {
-                Console.WriteLine(score);
+                Console.ForegroundColor = defaultColor;
             }
         }
+
         static void Main(string[] args)
         {
-            // 배열, 
-            int[] scores = new int[5] { 10, 30, 40, 20, 50 };
-            int highestValue = GetHighestScore(scores);
-            Console.WriteLine(highestValue);
+            Map map = new Map();
+            map.Render();
 
-            int averageScore = GetAverageScore(scores);
-            Console.WriteLine(averageScore);
-
-            int index = GetIndexOf(scores, 25);
-            Console.WriteLine(index);
-
-            Sort(scores);
-
+            int[,] arr = new int[2, 3] { { 0, 1, 2 }, { 3, 4, 5 } };
+            for(int i=0; i<arr.GetLength(1); i++)
+            {
+                for(int j=0; j<arr.GetLength(0); j++)
+                {
+                    Console.Write(arr[i,j]+" / ");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
