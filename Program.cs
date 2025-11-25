@@ -8,50 +8,26 @@ namespace CSharp
 
     internal class Program
     {
-        class Map
-        {
-
-            int[,] tiles = {
-            {1, 1, 1, 1, 1 },
-            {1, 0, 0, 0, 1 },
-            {1, 0, 0, 0, 1 },
-            {1, 0, 0, 0, 1 },
-            {1, 1, 1, 1, 1 }};
-            public void Render()
-            {
-            ConsoleColor defaultColor = Console.ForegroundColor;
-
-                for(int y=0; y<tiles.GetLength(1); y++)
-                {
-                    for(int x =0; x<tiles.GetLength(0); x++)
-                    {
-                        if (tiles[y, x] == 1)
-                            Console.ForegroundColor = ConsoleColor.Red;
-                        else
-                            Console.ForegroundColor = ConsoleColor.Green;
-                        Console.Write('\u25cf');
-                    }
-                    Console.WriteLine();
-                }
-
-                Console.ForegroundColor = defaultColor;
-            }
-        }
-
         static void Main(string[] args)
         {
-            Map map = new Map();
-            map.Render();
+            int[] arr = new int[10];
 
-            int[,] arr = new int[2, 3] { { 0, 1, 2 }, { 3, 4, 5 } };
-            for(int i=0; i<arr.GetLength(1); i++)
-            {
-                for(int j=0; j<arr.GetLength(0); j++)
-                {
-                    Console.Write(arr[i,j]+" / ");
-                }
-                Console.WriteLine();
-            }
+            // List <- 동적 배열
+            List<int> list = new List<int>();
+            for (int i = 0; i < 5; i++) list.Add(i);
+
+            // 삽입 삭제
+            //list.Insert(2, 999);
+
+            //bool success =  list.Remove(3); // Remove는 해당 값 삭제
+            //list.RemoveAt(0); // RemoveAt는 해당 인덱스 삭제
+            list.Clear(); // 전체 삭제
+
+            for (int i=0; i<list.Count; i++)
+                Console.WriteLine(list[i]);
+
+            foreach(int num in list)
+                Console.WriteLine(num);
         }
     }
 }
