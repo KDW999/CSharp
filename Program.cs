@@ -8,26 +8,26 @@ namespace CSharp
 
     internal class Program
     {
+        class Monster
+        {
+            public int id;
+            public Monster(int id) { this.id = id; }
+        }
         static void Main(string[] args)
         {
-            int[] arr = new int[10];
+            // HashTable : 메모리 사용량은 늘지만 성능은 향상
+            // Key -> value
+            // Dictionary
+            Dictionary<int, Monster> dic = new Dictionary<int, Monster>();
+            for(int i=0; i<10000; i++)
+            {
+                dic.Add(i, new Monster(i));
+            }
+            Monster mon;
+            bool found = dic.TryGetValue(2000, out mon);
 
-            // List <- 동적 배열
-            List<int> list = new List<int>();
-            for (int i = 0; i < 5; i++) list.Add(i);
-
-            // 삽입 삭제
-            //list.Insert(2, 999);
-
-            //bool success =  list.Remove(3); // Remove는 해당 값 삭제
-            //list.RemoveAt(0); // RemoveAt는 해당 인덱스 삭제
-            list.Clear(); // 전체 삭제
-
-            for (int i=0; i<list.Count; i++)
-                Console.WriteLine(list[i]);
-
-            foreach(int num in list)
-                Console.WriteLine(num);
+            dic.Remove(7777);
+            dic.Clear();
         }
     }
 }
