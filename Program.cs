@@ -8,26 +8,36 @@ namespace CSharp
 
     internal class Program
     {
+        class MyList<T> where T : Monster // T는 어떤거든 넣을 수 있지만 몬스터를 상속받은 클래스여야한다, 특정 제약조건을 걸 수 있음
+        { 
+            // T는 사용하고 싶은 타입형으로 변경 가능
+            T[] arr = new T[10];
+            
+            public T GetItem(int i)
+            {
+                return arr[i];
+            }
+        }
+        
         class Monster
         {
-            public int id;
-            public Monster(int id) { this.id = id; }
+
         }
+
+        static void Test<T>(T input)
+        {
+
+        }
+        
         static void Main(string[] args)
         {
-            // HashTable : 메모리 사용량은 늘지만 성능은 향상
-            // Key -> value
-            // Dictionary
-            Dictionary<int, Monster> dic = new Dictionary<int, Monster>();
-            for(int i=0; i<10000; i++)
-            {
-                dic.Add(i, new Monster(i));
-            }
-            Monster mon;
-            bool found = dic.TryGetValue(2000, out mon);
+            MyList<int> myIntList = new MyList<int>();
+            int item = myIntList.GetItem(0);
 
-            dic.Remove(7777);
-            dic.Clear();
+            MyList<short> myShortList = new MyList<short>();
+            MyList<Monster> myMonsterList = new MyList<Monster>();
+
+            Test<int>(3);
         }
     }
 }
