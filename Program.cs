@@ -8,49 +8,32 @@ namespace CSharp
 
     internal class Program
     {
-        abstract class Monster
+        // 객체지향 -> 은닉성
+        class Knight
         {
-            public abstract void shout(); // 추상 메서드는 자식에서 무조건 오버라이딩 해야함
-           
-        }
+            protected int hp;
 
-        abstract class Flyable
-        {
-            public abstract void Fly();
-        }
-        
-        interface IFlyable
-        {
-           void Fly();
-        }
-
-        class Orc : Monster
-        {
-            public override void shout()
+            //public int Hp { get; set; } = 100; // 자동 구현 프로퍼티, get,set + 필드변수 자동생성
+            public int Hp
             {
-                Console.WriteLine("록타르 오가르");
+                get { return hp; }
+                set { hp = value; }
             }
+
+            // getter / setter
+            //public int GetHp() { return hp; }
+            //public void SetHp(int hp)
+            //{
+            //        this.hp = hp;
+            //}   
         }
-
-        // 상속은 다중 상속이 안된다, 인터페이스는 다중 구현이 가능
-        class FlyableOrc : Orc, IFlyable
-        {
-            public void Fly()
-            {
-
-            }
-        }
-     
-        static void DoFly(IFlyable flyable)
-        {
-            flyable.Fly();
-        }   
-
         static void Main(string[] args)
         {
-            IFlyable flyable = new FlyableOrc();
-            DoFly(flyable);
- 
+            // 프로퍼티 : getter / setter를 축약한 문법
+            Knight knight = new Knight();
+            //knight.SetHp(100);
+            knight.Hp = 100;
+            int hp = knight.Hp; 
         }
     }
 }
