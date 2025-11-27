@@ -8,36 +8,49 @@ namespace CSharp
 
     internal class Program
     {
-        class MyList<T> where T : Monster // T는 어떤거든 넣을 수 있지만 몬스터를 상속받은 클래스여야한다, 특정 제약조건을 걸 수 있음
-        { 
-            // T는 사용하고 싶은 타입형으로 변경 가능
-            T[] arr = new T[10];
-            
-            public T GetItem(int i)
+        abstract class Monster
+        {
+            public abstract void shout(); // 추상 메서드는 자식에서 무조건 오버라이딩 해야함
+           
+        }
+
+        abstract class Flyable
+        {
+            public abstract void Fly();
+        }
+        
+        interface IFlyable
+        {
+           void Fly();
+        }
+
+        class Orc : Monster
+        {
+            public override void shout()
             {
-                return arr[i];
+                Console.WriteLine("록타르 오가르");
             }
         }
-        
-        class Monster
+
+        // 상속은 다중 상속이 안된다, 인터페이스는 다중 구현이 가능
+        class FlyableOrc : Orc, IFlyable
         {
+            public void Fly()
+            {
 
+            }
         }
-
-        static void Test<T>(T input)
+     
+        static void DoFly(IFlyable flyable)
         {
+            flyable.Fly();
+        }   
 
-        }
-        
         static void Main(string[] args)
         {
-            MyList<int> myIntList = new MyList<int>();
-            int item = myIntList.GetItem(0);
-
-            MyList<short> myShortList = new MyList<short>();
-            MyList<Monster> myMonsterList = new MyList<Monster>();
-
-            Test<int>(3);
+            IFlyable flyable = new FlyableOrc();
+            DoFly(flyable);
+ 
         }
     }
 }
