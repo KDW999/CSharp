@@ -8,32 +8,39 @@ namespace CSharp
 
     internal class Program
     {
-        // 객체지향 -> 은닉성
-        class Knight
+        // delegate -> 함수 자체를 인자로 넘겨주는 형식
+        // 반환:int, 입력:void
+        // OnClicked이 delegate 형식의 이름
+        delegate int OnClicked();
+
+        static void ButtonPressed(OnClicked clickedFunction)
         {
-            protected int hp;
-
-            //public int Hp { get; set; } = 100; // 자동 구현 프로퍼티, get,set + 필드변수 자동생성
-            public int Hp
-            {
-                get { return hp; }
-                set { hp = value; }
-            }
-
-            // getter / setter
-            //public int GetHp() { return hp; }
-            //public void SetHp(int hp)
-            //{
-            //        this.hp = hp;
-            //}   
+            // 함수 호출
+            clickedFunction();
         }
+
+        static int TestDelegate()
+        {
+            Console.WriteLine("Hello Delegate");
+            return 0;
+        }
+
+        static int TestDelegate2()
+        {
+            Console.WriteLine("Hello Delegate 2");
+            return 0;
+        }
+
         static void Main(string[] args)
         {
-            // 프로퍼티 : getter / setter를 축약한 문법
-            Knight knight = new Knight();
-            //knight.SetHp(100);
-            knight.Hp = 100;
-            int hp = knight.Hp; 
+            // ★ delegate (대리자), CallBack
+            // 메서드를 데이터 취급하여 전달할 수 있고, 어떤 메서드가 실행될 지는 실행 시점에 정한다.
+            Console.WriteLine();
+
+            OnClicked clicked = new OnClicked(TestDelegate);
+            clicked += TestDelegate2; // 여러 함수를 체이닝해서 사용 가능
+
+            ButtonPressed(clicked);
         }
     }
 }
