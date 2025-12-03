@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using CSharp.Algorithm;
+using System.Collections.Specialized;
 using System.ComponentModel.Design;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,10 @@ namespace CSharp
 
         static void Main(string[] args)
         {
+
+            Board board = new Board();
+            board.Initialize();
+
             Console.CursorVisible = false;
 
             const int WAIT_TICK = 1000 / 30;
