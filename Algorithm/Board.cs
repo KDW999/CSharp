@@ -8,23 +8,27 @@ namespace CSharp.Algorithm
 {
 
 
-    internal class Board
+    class Board
     {
         const char CIRCLE = '\u25cf';
         public TileType[,] _tile; // 배열
         public int _size;
+
+        Player _player;
 
         public enum TileType
         {
             Empty,
             Wall,
         }
-        public void Initialize(int size)
+        public void Initialize(int size, Player player)
         {
             if (size % 2 == 0)
                 return;
             _tile = new TileType[size, size];
             _size = size;
+
+            _player = player;
 
             //GenerateByBinaryTree();
             GenerateBySideWinder();
@@ -70,7 +74,7 @@ namespace CSharp.Algorithm
                     if (rand.Next(0, 2) == 0)
                     {
                         _tile[y, x + 1] = TileType.Empty;
-                        count++;
+                        count++; 
                     }
                     else
                     {
@@ -144,7 +148,12 @@ namespace CSharp.Algorithm
             {
                 for (int x = 0; x < _size; x++)
                 {
-                    Console.ForegroundColor = GetTileColor(_tile[y, x]);
+                    // 플레이어 좌표 갖고 와서, 좌표랑 현재 y, x가 일치하면 플레이어 전용 색상으로 표시
+                    if(y == _player.PosY && x == _player.PosX)
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                    else
+                        Console.ForegroundColor = GetTileColor(_tile[y, x]);
+                    
                     Console.Write(CIRCLE);
                 }
                 Console.WriteLine();
