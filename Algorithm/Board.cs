@@ -13,6 +13,8 @@ namespace CSharp.Algorithm
         const char CIRCLE = '\u25cf';
         public TileType[,] Tile { get; private set; }
         public int Size { get; private set;}
+        public int DestY { get; private set; }
+        public int DestX { get; private set; }
 
         Player _player;
 
@@ -27,6 +29,9 @@ namespace CSharp.Algorithm
                 return;
             Tile = new TileType[size, size];
             Size = size;
+
+            DestY = Size - 2;
+            DestX = Size - 2;
 
             _player = player;
 
@@ -149,8 +154,10 @@ namespace CSharp.Algorithm
                 for (int x = 0; x < Size; x++)
                 {
                     // 플레이어 좌표 갖고 와서, 좌표랑 현재 y, x가 일치하면 플레이어 전용 색상으로 표시
-                    if(y == _player.PosY && x == _player.PosX)
+                    if (y == _player.PosY && x == _player.PosX)
                         Console.ForegroundColor = ConsoleColor.Blue;
+                    else if (y == DestY && x == DestX)
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                     else
                         Console.ForegroundColor = GetTileColor(Tile[y, x]);
                     

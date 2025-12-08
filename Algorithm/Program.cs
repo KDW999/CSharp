@@ -17,7 +17,7 @@ namespace CSharp
             Board board = new Board();
             Player player = new Player();
             board.Initialize(25, player);
-            player.Initialize(1, 1, board.Size-2, board.Size-2, board);
+            player.Initialize(1, 1, board);
 
             Console.CursorVisible = false;
 
@@ -34,12 +34,12 @@ namespace CSharp
                     continue;
 
                 int deltaiTick = currentTick - lastTick;
-                player.Update(deltaiTick);
                 lastTick = currentTick;
                 #endregion
                 // 입력
 
                 // 로직
+                player.Update(deltaiTick);
 
                 // 렌더링
                 Console.SetCursorPosition(0, 0);
