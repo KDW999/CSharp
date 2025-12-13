@@ -42,7 +42,7 @@ namespace CSharp.Algorithm
         void BFS()
         {
             int[] dY = new int[] { -1, 0, 1, 0 };
-            int[] dX = new int[] { 0, -1, 1, 0 };
+            int[] dX = new int[] { 0, -1, 0, 1 };
             bool[,] found = new bool[_board.Size, _board.Size];
             Pos[,] parent = new Pos[_board.Size, _board.Size];
 
